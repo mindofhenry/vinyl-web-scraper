@@ -1,6 +1,17 @@
-import requests
-from bs4 import BeautifulSoup
+import subprocess
 
+try:
+    import requests
+    from bs4 import BeautifulSoup
+except ModuleNotFoundError:
+    # If libraries are not found, install them using pip (hence the uce of subprocess)
+    print("Required libraries not found, installing...")
+    subprocess.run(["pip", "install", "requests", "beautifulsoup4"])
+
+    # Re-import libraries post-installation
+    import requests
+    from bs4 import BeautifulSoup
+    
 def scrape_website(url):
 
     """Scrapes a website and downloads dictionaries of data
@@ -27,3 +38,18 @@ def scrape_website(url):
     for listing in listings:
         # data extraction from each listing
         title_element = listing.find()
+
+    records.append({
+        'title': title,
+        'artist': artist,
+        'price': price,
+        'condition': condition
+    })
+
+    return records
+
+# website URLs, discogs to start
+
+discogs_url = 
+
+# call the scrape website function for each website
